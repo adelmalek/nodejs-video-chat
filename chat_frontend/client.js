@@ -29,3 +29,24 @@ navigator
         console.log(device.kind + ": " + device.label + " id = " + device.devideId)
     }))
     .catch(error => console.log(error.name + ": " + error.message));
+
+
+/* microphone */
+
+navigator
+    .mediaDevices
+    .enumerateDevices()
+    .then(devices => {
+        let html = "";
+        devices
+            .filter(device => device.kind === "audioinput")
+            .map(device => html += `<option value=${device.deviceId}>${device.label}</option>`);
+        const devicesSelect = document.querySelector(".js-input-devices");
+        devicesSelect.innerHTML = html;
+        devicesSelect.addEventListener('change', changeMicrophone)
+    })
+    .catch(error => console.log(error.name + ": " + error.message));
+
+function changeMicrophone(event) {
+    console.log(event.target.value)
+};
