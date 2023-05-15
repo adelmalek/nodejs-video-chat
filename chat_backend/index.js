@@ -38,6 +38,12 @@ const io = new Server(
         }
     }
 );
+
+
+/* pass id to client */
+
 io.on('connection', socket => {
     console.log(`User ${socket.id} has connected.`)
+
+    socket.emit('connected', socket.id);
 });

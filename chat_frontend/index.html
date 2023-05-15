@@ -11,12 +11,28 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="container  js-container"></div>
-    <select class="input-devices  js-input-devices" name="input-devices"></select>
-    <div class="buttons">
-        <button class="start-btn  js-start-stream">Start</button>
-        <button class="stop-btn  js-stop-stream">Stop</button>
+    <div class="container-one">
+        <div class="container  js-container"></div>
+        <select class="input-devices  js-input-devices" name="input-devices"></select>
+        <div class="buttons">
+            <button class="start-btn  js-start-stream">Start</button>
+            <button class="stop-btn  js-stop-stream">Stop</button>
+        </div>
     </div>
+    
+    <div class="container-call">
+        <input class="call-input  js-call-id" type="text" name="call-id">
+        <button class="call-btn js-call">Call</button>
+    </div>
+   
+    <div class="container-two">
+        <div class="container  js-other-container"></div>
+        <div class="form">
+            <button class="answer-btn  js-answer" disabled>Answer</button>
+            <button class="hangup-btn  js-hangup" disabled>Hang Up</button>
+        </div>
+    </div>
+    
     <script src="./socket.io/socket.io.js"></script>
     <script src="./client.js"></script>
 </body>
