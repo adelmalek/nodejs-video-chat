@@ -5,13 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
-    <div class="js-container"></div>
-    <select class="js-input-devices" name="input-devices"></select>
-    <button class="js-start-stream">Start</button>
-    <button class="js-stop-stream">Stop</button>
+    <div class="container  js-container"></div>
+    <select class="input-devices  js-input-devices" name="input-devices"></select>
+    <div class="buttons">
+        <button class="start-btn  js-start-stream">Start</button>
+        <button class="stop-btn  js-stop-stream">Stop</button>
+    </div>
     <script src="./socket.io/socket.io.js"></script>
     <script src="./client.js"></script>
 </body>
