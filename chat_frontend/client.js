@@ -73,7 +73,7 @@ function connectionReceived(currentId) {
 /* other id and signal */
 
 function called(payload) {
-    console.log("Called(): ", payload);
+    console.log("receiverPeer has called by callerPeer: ", payload);
     ANSWER_BTN.disabled = false;
     otherId = payload.sourceUserId;
     signal = payload.signal
@@ -143,7 +143,7 @@ CALL_BTN.addEventListener('click', () => {
     });
 
     callerPeer.on('signal', signal => {
-        if (CALL_INPUT.value.trim() > 0 && CALL_INPUT.value !== id) {
+        if (CALL_INPUT.value.trim().length > 0 && CALL_INPUT.value !== id) {
             socket.emit('send-call', {
                 targetUserId: CALL_INPUT.value,
                 sourceUserId: id,
@@ -157,7 +157,6 @@ CALL_BTN.addEventListener('click', () => {
         renderVideo(stream, ".js-other-container")
     });
 });
-
 
 
 

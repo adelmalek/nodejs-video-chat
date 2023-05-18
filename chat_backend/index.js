@@ -42,7 +42,7 @@ const io = new Server(
 
 /* 
 pass id to client
-get callerPeer id from client
+get receiverPeer id from client
  */
 
 io.on('connection', socket => {
@@ -51,8 +51,8 @@ io.on('connection', socket => {
     socket.emit('connected', socket.id);
 
     socket.on('send-call', (payload) => {
-        console.log("Send call to: ", payload.targetUserId);
-        if (payload.targetUserId === sourceUserId) {
+        console.log("callerPeer send call to: ", payload.targetUserId);
+        if (payload.targetUserId === payload.sourceUserId) {
             return;
         }
         io.to(payload.targetUserId).emit('call', payload);
