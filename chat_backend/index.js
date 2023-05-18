@@ -51,10 +51,15 @@ io.on('connection', socket => {
     socket.emit('connected', socket.id);
 
     socket.on('send-call', (payload) => {
-        console.log("callerPeer send call to: ", payload.targetUserId);
+        console.log("callerPeer sends a call to: ", payload.targetUserId);
         if (payload.targetUserId === payload.sourceUserId) {
             return;
         }
         io.to(payload.targetUserId).emit('call', payload);
     });
+
+    socket.on('answer-call', (payload) => {
+        console.log("receiverPeer answers callerPeer: ", payload.targetUserId);
+        io.to(payload.targetUserId).emit('answered', payload);
+    })
 });

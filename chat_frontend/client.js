@@ -148,18 +148,42 @@ CALL_BTN.addEventListener('click', () => {
                 targetUserId: CALL_INPUT.value,
                 sourceUserId: id,
                 signal
-            })
+            });
         }
     });
     
     callerPeer.on('stream', (stream) => {
         console.log("callerPeer stream: ", stream);
-        renderVideo(stream, ".js-other-container")
+        renderVideo(stream, ".js-container")
     });
 });
 
 
+/* answer */
 
+ANSWER_BTN.addEventListener('click', () => {
+    ANSWER_BTN.disabled = true;
+
+    receiverPeer = new SimplePeer({
+        initiator: false,
+        trickle: false,
+        stream: currentStream
+    });
+
+    receiverPeer.on('signal', (signal) => {
+        socket.emit('answer-call', {
+            targetUserId: otherId,
+            sourceUserId: id,
+            signal
+        });
+    });
+
+    receiverPeer.on('stream', (stream) => {
+        renderVideo(stream, '.js-other-container');
+    });
+
+    receiverPeer.signal(signal);
+});
 
 
 
