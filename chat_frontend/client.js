@@ -57,7 +57,7 @@ function initialSocket() {
     socket = io("http://localhost:8000");
     socket.on('connected', connectionReceived);
     socket.on('call', called);
-    /*socket.on('answered', answered);*/
+    socket.on('answered', answered);
 };
 
 
@@ -70,13 +70,23 @@ function connectionReceived(currentId) {
 };
 
 
-/* other id and signal */
+/* receiverPeer id and signal */
 
 function called(payload) {
     console.log("receiverPeer has called by callerPeer: ", payload);
     ANSWER_BTN.disabled = false;
+    HANGUP_BTN.disabled = false;
     otherId = payload.sourceUserId;
     signal = payload.signal
+};
+
+
+/* callerPeer signal */
+
+function answered(payload) {
+    console.log('callerPeer is receiving an answer: ', payload);
+    HANGUP_BTN.disabled = false;
+    callerPeer.signal(payload.signal);
 };
 
 
@@ -154,7 +164,7 @@ CALL_BTN.addEventListener('click', () => {
     
     callerPeer.on('stream', (stream) => {
         console.log("callerPeer stream: ", stream);
-        renderVideo(stream, ".js-container")
+        renderVideo(stream, ".js-other-container")
     });
 });
 
@@ -185,6 +195,15 @@ ANSWER_BTN.addEventListener('click', () => {
     receiverPeer.signal(signal);
 });
 
+
+/* hang up */
+
+HANGUP_BTN.addEventListener('click', () => {
+    ANSWER_BTN.disabled = true;
+    HANGUP_BTN.disabled = true;
+    stopStream();
+    receiverPeer.send('receiverPeer disconnected the call.')
+});
 
 
 
