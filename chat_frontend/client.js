@@ -201,8 +201,7 @@ ANSWER_BTN.addEventListener('click', () => {
 HANGUP_BTN.addEventListener('click', () => {
     ANSWER_BTN.disabled = true;
     HANGUP_BTN.disabled = true;
-    stopStream();
-    receiverPeer.send('receiverPeer disconnected the call.')
+    document.querySelector(".js-other-container").innerHTML = "";
 });
 
 
