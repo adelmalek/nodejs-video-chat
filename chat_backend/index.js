@@ -3,15 +3,12 @@
 const express = require('express');
 const cors = require('cors');
 const http = require('http');
-const favicon = require('serve-favicon');
-const path = require('path');
 
 
 /* express server */
 
 const app = express();
 app.use(cors()); /* middleware */
-app.use(favicon(path.join(__dirname, 'icon', 'favicon-16x16.png')));
 
 const httpAppServer = http.createServer(app);
 const port = process.env.PORT ?? 8000;
